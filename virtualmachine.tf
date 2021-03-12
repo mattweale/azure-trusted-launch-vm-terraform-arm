@@ -57,7 +57,7 @@ resource "azurerm_managed_disk" "addc_vm_data_disk" {
 
 resource "azurerm_virtual_machine_data_disk_attachment" "addc_vm-disk-attach" {
   managed_disk_id    = azurerm_managed_disk.addc_vm_data_disk.id
-  virtual_machine_id = azurerm_virtual_machine.addc_vm_data_disk.id
+  virtual_machine_id = azurerm_virtual_machine.addc_vm.id
   lun                = "10"
   caching            = "ReadWrite"
 }
