@@ -42,16 +42,24 @@ resource "azurerm_windows_virtual_machine" "addc_vm" {
     caching              = "ReadWrite"
     storage_account_type = "StandardSSD_LRS"
   }
+}
 
-    storage_data_disk {
-    name                = "addc-vm-data-disk"
-    disk_size_gb        = "10"
-    managed_disk_type   = "StandardSSD_LRS"
-    create_option       = "Attach"
-    lun                 = 10
-  }
+resource "azurerm_managed_disk" "addc_vm_data_disk" {
+  name                 = "addc-vm-data-disk"
+  location             = var.location
+  resource_group_name  = azurerm_resource_group.rg.name
+  disk_size_gb         = "10"
+  storage_account_type = "StandardSSD_LRS"
+  create_option        = "Empty"
+  tags                 = var.tags
 
-  tags = var.tags
+}
+
+resource "azurerm_virtual_machine_data_disk_attachment" "addc_vm-disk-attach" {
+  managed_disk_id    = azurerm_managed_disk.addc_vm_data_disk.id
+  virtual_machine_id = azurerm_virtual_machine.addc_vm_data_disk.id
+  lun                = "10"
+  caching            = "ReadWrite"
 }
 
 ##########################################################
