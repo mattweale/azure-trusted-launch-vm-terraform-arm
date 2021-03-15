@@ -10,7 +10,7 @@ resource "azurerm_virtual_network" "spoke_vnet" {
 }
 
 #######################################################################
-## Create Subnet in Spoke for Backend VMs
+## Create Subnet in Spoke for WVD Host Pool
 #######################################################################
 resource "azurerm_subnet" "subnet_be" {
   name                 = "back-end-subnet"

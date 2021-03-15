@@ -145,7 +145,37 @@ resource "azurerm_firewall_network_rule_collection" "wvd_outbound_rule" {
   rule {
     name = "Outbound"
 
-    source_addresses = ["172.17.0.0/24",
+    source_addresses = ["172.17.1.0/24",
+    ]
+
+    destination_ports = [
+      "*",
+    ]
+
+    destination_addresses = [
+      "*"
+    ]
+
+    protocols = [
+      "Any"
+    ]
+  }
+}
+
+#######################################################################
+## Create Network Rule for Services Subnet Outbound
+#######################################################################
+resource "azurerm_firewall_network_rule_collection" "services_outbound_rule" {
+  name                = "${var.prefix}services-outbound-rule"
+  azure_firewall_name = azurerm_firewall.firewall.name
+  resource_group_name = azurerm_resource_group.rg.name
+  priority            = 400
+  action              = "Allow"
+
+  rule {
+    name = "Outbound"
+
+    source_addresses = ["172.16.3.0/24",
     ]
 
     destination_ports = [
