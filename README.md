@@ -1,4 +1,4 @@
-# **Azure Firewall and Application Gateway in Parallel in Hub <> Spoke**
+# **Azure Hub <> Spoke and Active Directory Domain Controller**
 
 # Contents
 [Overview](#overview)
