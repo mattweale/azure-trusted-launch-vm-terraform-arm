@@ -20,7 +20,7 @@ resource "azurerm_subnet" "fw_subnet" {
 }
 
 #######################################################################
-## Create Subnet in Bastion
+## Create Subnet for Bastion
 #######################################################################
 resource "azurerm_subnet" "bastion_hub_subnet" {
   name                 = "AzureBastionSubnet"
@@ -30,7 +30,7 @@ resource "azurerm_subnet" "bastion_hub_subnet" {
 }
 
 #######################################################################
-## Create Subnet in Hub for Services [AD Domain Controller]
+## Create Subnet in Hub for Services
 #######################################################################
 resource "azurerm_subnet" "services_subnet" {
   name                 = "services-subnet"

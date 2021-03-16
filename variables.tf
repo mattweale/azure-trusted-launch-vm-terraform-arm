@@ -16,12 +16,12 @@ variable "arm_client_id" {
 variable "location" {
   description = "Region"
   type        = string
-  default     = "UK South"
+  default     = "North Europe"
 }
 variable "prefix" {
   description = "Default Naming Prefix"
   type        = string
-  default     = "tf-hub-spoke-addc-"
+  default     = "tf-hub-spoke-"
 }
 variable "tags" {
   type        = map(any)
@@ -39,5 +39,5 @@ variable "password" {
 }
 variable "vmsize" {
   description = "Size of the VMs"
-  default     = "Standard_D4s_v4"
+  default     = "Standard_D2s_v4"
 }
