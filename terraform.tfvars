@@ -11,3 +11,18 @@ tags = {
   "purpose"     = "hub-spoke"
   "createdby"   = "terraform"
 }
+
+#######################################################################
+## Populate initialised variables for ARM Template
+#######################################################################
+vmName               = "TrustedLaunch-VM"
+sku                  = "20h2-ent-g2"
+vmsize               = "Standard_D2s_v4"
+username             = "adminuser"
+password             = "Pa55w0rd123!"
+networkInterfaceName = "vm-nic"
+osDiskType           = "Premium_LRS"
+secureBoot           = "true"
+vTPM                 = "true"
+patchMode            = "Manual"
+enableHotpatching    = "false"

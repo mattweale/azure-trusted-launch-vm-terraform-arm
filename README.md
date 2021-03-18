@@ -17,9 +17,6 @@ Some useful documentation:
 
 Azure Windows Virtual Desktop Requirements [documentation](https://docs.microsoft.com/en-gb/azure/virtual-desktop/overview#requirements)
 
-Once deployed it should look like this:
-
-![image](images/azure-addc-hub-spoke.png)
 
 Note that this stores state locally so a backend block with need to be added if required.
 
