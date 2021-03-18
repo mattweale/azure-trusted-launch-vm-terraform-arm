@@ -21,26 +21,16 @@ variable "location" {
 variable "prefix" {
   description = "Default Naming Prefix"
   type        = string
-  default     = "tf-hub-spoke-"
+  default     = "tf-trusted-vm-arm-"
 }
 variable "tags" {
   type        = map(any)
   description = "Tags to be attached to azure resources"
 }
-variable "username" {
-  description = "Username for Virtual Machines"
-  type        = string
-  default     = "adminuser"
-}
-variable "password" {
-  description = "Virtual Machine password, must meet Azure complexity requirements"
-  type        = string
-  default     = "Pa55w0rd123!"
-}
 #######################################################################
 ## Initialise variables for ARM Template
 #######################################################################
-variable "vmName" {
+variable "virtualMachineName" {
   type        = string
   description = "Name of Virtual Machine"
 }
@@ -48,15 +38,19 @@ variable "sku" {
   type        = string
   description = "VM SKU"
 }
-variable "vmsize" {
+variable "virtualMachineSize" {
   type        = string
   description = "Size of the VM"
 }
-variable "username" {
+variable "virtualMachineComputerName" {
+  type        = string
+  description = "Computer Name of the VM"
+}
+variable "adminUsername" {
   description = "Username for Virtual Machines"
   type        = string
 }
-variable "password" {
+variable "adminPassword" {
   description = "Virtual Machine password, must meet Azure complexity requirements"
   type        = string
 }
@@ -71,16 +65,4 @@ variable "osDiskType" {
 variable "patchMode" {
   description = "Patch Mode for VM"
   type        = string
-}
-variable "enableHotpatching" {
-  description = "Secure Boot Setting of the VM"
-  type        = bool
-}
-variable "secureBoot" {
-  description = "Secure Boot Setting of the VM"
-  type        = bool
-}
-variable "vTPM" {
-  description = "vTPM Setting of the VM"
-  type        = bool
 }

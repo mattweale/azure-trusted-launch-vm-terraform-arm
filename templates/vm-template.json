@@ -20,13 +20,13 @@
         "virtualMachineComputerName": {
             "type": "string"
         },
-        "virtualMachineRG": {
-            "type": "string"
-        },
         "osDiskType": {
             "type": "string"
         },
         "virtualMachineSize": {
+            "type": "string"
+        },
+        "sku": {
             "type": "string"
         },
         "adminUsername": {
@@ -37,9 +37,6 @@
         },
         "patchMode": {
             "type": "string"
-        },
-        "enableHotpatching": {
-            "type": "bool"
         }
     },
     "variables": {
@@ -89,7 +86,7 @@
                     "imageReference": {
                         "publisher": "MicrosoftWindowsDesktop",
                         "offer": "Windows-10",
-                        "sku": "20h2-ent-g2",
+                        "sku": "[parameters('sku')]",
                         "version": "latest"
                     }
                 },
@@ -100,6 +97,13 @@
                         }
                     ]
                 },
+                "securityProfile": {
+                    "uefiSettings": {
+                            "secureBootEnabled": true,
+                            "vTPMEnabled": true
+                                    },
+                    "securityType": "TrustedLaunch"
+        },
                 "osProfile": {
                     "computerName": "[parameters('virtualMachineComputerName')]",
                     "adminUsername": "[parameters('adminUsername')]",
@@ -108,7 +112,7 @@
                         "enableAutomaticUpdates": false,
                         "provisionVmAgent": true,
                         "patchSettings": {
-                            "enableHotpatching": "[parameters('enableHotpatching')]",
+                            "enableHotpatching": false,
                             "patchMode": "[parameters('patchMode')]"
                         }
                     }

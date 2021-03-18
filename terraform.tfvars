@@ -15,14 +15,12 @@ tags = {
 #######################################################################
 ## Populate initialised variables for ARM Template
 #######################################################################
-vmName               = "TrustedLaunch-VM"
-sku                  = "20h2-ent-g2"
-vmsize               = "Standard_D2s_v4"
-username             = "adminuser"
-password             = "Pa55w0rd123!"
-networkInterfaceName = "vm-nic"
-osDiskType           = "Premium_LRS"
-secureBoot           = "true"
-vTPM                 = "true"
-patchMode            = "Manual"
-enableHotpatching    = "false"
+virtualMachineName         = "TrustedLaunch-VM"
+sku                        = "20h2-ent-g2"
+virtualMachineSize         = "Standard_D2s_v4"
+virtualMachineComputerName = "trusted-vm-1234"
+adminUsername              = "adminuser"
+adminPassword              = "Pa55w0rd123!"
+networkInterfaceName       = "vm-nic"
+osDiskType                 = "Premium_LRS"
+patchMode                  = "Manual"
