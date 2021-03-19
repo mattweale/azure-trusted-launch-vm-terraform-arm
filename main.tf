@@ -10,26 +10,29 @@ resource "azurerm_resource_group" "rg" {
 #######################################################################
 ## Deploy ARM Template - Important to Set Deployment Mode to Incremental
 #######################################################################
-resource "azurerm_template_deployment" "trusted_vm_arm" {
+resource "azurerm_resource_group_template_deployment" "trusted_vm_arm" {
   count               = 1
   name                = "${var.prefix}trusted-vm-deployment"
   resource_group_name = azurerm_resource_group.rg.name
 
   depends_on = [azurerm_subnet.spoke_subnet]
 
-  template_body = file("./templates/vm-template.json")
+  template_content = file("./templates/vm-template.json")
 
-  parameters = {
-    virtualMachineName         = var.virtualMachineName
-    sku                        = var.sku
-    virtualMachineSize         = var.virtualMachineSize
-    virtualMachineComputerName = var.virtualMachineComputerName
-    adminUsername              = var.adminUsername
-    adminPassword              = var.adminPassword
-    patchMode                  = var.patchMode
-    virtualNetworkID           = azurerm_virtual_network.spoke_vnet.name
-    subnetName                 = azurerm_subnet.spoke_subnet.name
-  }
+  parameters_content = jsonencode({
+    location                   = { value = var.location }
+    virtualMachineName         = { value = var.virtualMachineName }
+    sku                        = { value = var.sku }
+    virtualMachineSize         = { value = var.virtualMachineSize }
+    virtualMachineComputerName = { value = var.virtualMachineComputerName }
+    networkInterfaceName       = { value = var.networkInterfaceName }
+    osDiskType                 = { value = var.osDiskType }
+    adminUsername              = { value = var.adminUsername }
+    adminPassword              = { value = var.adminPassword }
+    patchMode                  = { value = var.patchMode }
+    virtualNetworkID           = { value = azurerm_virtual_network.spoke_vnet.name }
+    subnetName                 = { value = azurerm_subnet.spoke_subnet.name }
+  })
 
   deployment_mode = "Incremental"
 }

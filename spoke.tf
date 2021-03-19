@@ -24,7 +24,7 @@ resource "azurerm_subnet" "spoke_bastion_subnet" {
 ## Create Subnet in Spoke
 #######################################################################
 resource "azurerm_subnet" "spoke_subnet" {
-  name                 = "spoke-subnet"
+  name                 = "${var.prefix}spoke-subnet"
   resource_group_name  = azurerm_resource_group.rg.name
   virtual_network_name = azurerm_virtual_network.spoke_vnet.name
   address_prefixes     = ["172.17.2.0/24"]
