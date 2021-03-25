@@ -40,7 +40,7 @@
         }
     },
     "variables": {
-        "vnetId": "[parameters('virtualNetworkId')]",
+        "vnetId": "[parameters('virtualNetworkId')]"
       },
     "resources": [
         {

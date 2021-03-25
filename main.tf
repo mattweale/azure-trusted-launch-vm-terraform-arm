@@ -35,4 +35,9 @@ resource "azurerm_resource_group_template_deployment" "trusted_vm_arm" {
   })
 
   deployment_mode = "Incremental"
+
+}
+
+output "arm_example_output" {
+  value = jsondecode(azurerm_resource_group_template_deployment.trusted_vm_arm[0].output_content).adminUsername.value
 }
