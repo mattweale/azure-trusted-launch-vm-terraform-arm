@@ -1,7 +1,8 @@
-# **Azure Hub <> Spoke and Active Directory Domain Controller**
+# **Deploy and Azure VM configured with Trusted Launch [Secure Boot and vTPM]**
 
 # Contents
 [Overview](#overview)
+
 
 [Deployment](#deployment)
 
