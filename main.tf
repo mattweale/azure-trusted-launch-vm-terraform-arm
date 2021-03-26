@@ -30,14 +30,10 @@ resource "azurerm_resource_group_template_deployment" "trusted_vm_arm" {
     adminUsername              = { value = var.adminUsername }
     adminPassword              = { value = var.adminPassword }
     patchMode                  = { value = var.patchMode }
-    virtualNetworkID           = { value = azurerm_virtual_network.spoke_vnet.name }
+    virtualNetworkName         = { value = azurerm_virtual_network.spoke_vnet.name }
     subnetName                 = { value = azurerm_subnet.spoke_subnet.name }
   })
 
   deployment_mode = "Incremental"
 
-}
-
-output "arm_example_output" {
-  value = jsondecode(azurerm_resource_group_template_deployment.trusted_vm_arm[0].output_content).adminUsername.value
 }

@@ -1,5 +1,6 @@
-# Outputs
-#output "hub_firewall_public_ip_address" {
-#  value       = azurerm_public_ip.fw_pip.ip_address
-#  description = "The public IP address of the firewall"
-#}
+#######################################################################
+## Output
+#######################################################################
+output "arm_output_vm_username" {
+  value = jsondecode(azurerm_resource_group_template_deployment.trusted_vm_arm[0].output_content).adminUsername.value
+}
