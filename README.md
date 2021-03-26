@@ -8,18 +8,18 @@
 
 # Overview
 
-This Terraform module deploys a Hub and Spoke vNET connected with vNET Peering. An Azure Firewall sits in the Hub along with a Services Subnet containing a W2K19 Server running as a Forest Root Domain Controller. Bastion provides secure access to the DC.
+This Terraform module deploys a Hub and Spoke vNET connected with vNET Peering. Bastion sits in the Spoke along with alog with a D2s_v4 VM with Trust Launch [Secure Boot and vTPM].
 
-The Spoke vNET contains a single Subnet with a User Defined Route configured to push all outbound {internet} traffic through the Firewall.
-
-This forms the basis of some of the prerequisites for deploying Windows Virtual Desktop.
+A .tfvars file is used set variables, these are then passed to the ARM Template. the jsonencode function is used to encode the variables to a string using JSON syntax before passing to the ARM Template.
 
 Some useful documentation:
 
-Azure Windows Virtual Desktop Requirements [documentation](https://docs.microsoft.com/en-gb/azure/virtual-desktop/overview#requirements)
+Terraform AzureRM Resource Group Template Deployment [documentation](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/resources/resource_group_template_deployment).
+
+Azure Trusted Launch [documentation](https://docs.microsoft.com/en-gb/azure/virtual-machines/trusted-launch).
 
 
-Note that this stores state locally so a backend block with need to be added if required.
+Note that this will store state locally so a backend block with need to be added if required.
 
 # Deployment
 
@@ -35,11 +35,11 @@ Steps:
   
 - Clone the  GitHub repository:
   
-  `git clone https://github.com/mattweale/azure-addc-hub-spoke`
+  `git clone https://github.com/mattweale/azure-trusted-launchvm-terraform-arm`
   
   - Change directory:
   
-  `cd ./azure-addc-hub-spoke`
+  `cd ./azure-trusted-launchvm-terraform-arm`
   - Initialize terraform and download the azurerm resource provider:
 
   `terraform init`
@@ -48,13 +48,14 @@ Steps:
  
   `terraform apply`
 
-Deployment takes approximately 20 minutes. 
+Deployment takes approximately 10 minutes.
+
 ## Explore and verify
 
 After the Terraform deployment concludes successfully, the following has been deployed into your subscription:
-- A resource group named **tf-hub-spoke-addc-rg** containing:
-  - One Hub vNET containing a Firewall and an Application Gateway [with WAF].
-  - One Spoke vNET containing two Virtual Machine with Windows 2019 Datacenter Edition running IIS.
+- A resource group named **tf-trusted-vm-arm-rg** containing:
+  - One Hub vNET.
+  - One Spoke vNET containing one Virtual Machine with Windows 10 Enterprise Edition with Secure Boot enabled and a Bastion.
 
 Verify these resources are present in the portal.
 
@@ -64,10 +65,12 @@ Credentials for the VM are:
 
 You can only connect to the VM via Bastion.
 
+- Validate that secure boot is running on Windows by running msinfo32.exe
+
 ## Delete all resources
 
 Delete the tf-hub-spoke-addc-rg resource group. This may take up to 20 minutes to complete. Check back to verify that all resources have indeed been deleted.
 
 In Cloud Shell, delete the azure-hub-spoke-app-gateway directory:
 
-`rm -rf azure-addc-hub-spoke`
+`rm -rf azure-azure-trusted-launchvm-terraform-arm`
